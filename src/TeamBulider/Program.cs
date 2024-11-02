@@ -1,4 +1,4 @@
-namespace TeamBulider
+namespace TeamBuilder
 {
     internal static class Program
     {

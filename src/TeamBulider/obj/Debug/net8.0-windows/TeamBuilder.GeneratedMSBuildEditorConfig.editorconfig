@@ -14,6 +14,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = TeamBuilder
-build_property.ProjectDir = C:\Users\Wiktor\Desktop\PWR\magister\sem2\pr_program\football-team-builder\project\TeamBulider\
+build_property.ProjectDir = C:\Users\MAREK\Desktop\Git\football-team-builder\src\TeamBulider\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

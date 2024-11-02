@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TeamBuilder")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5a17ff5e7d19649793218ac5c2f7172573b2eed8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("TeamBuilder")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TeamBuilder")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
