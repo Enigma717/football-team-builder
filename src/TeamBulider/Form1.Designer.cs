@@ -28,18 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
+            label1 = new Label();
             SuspendLayout();
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 21F);
+            label1.Location = new Point(68, 70);
+            label1.Name = "label1";
+            label1.Size = new Size(234, 57);
+            label1.TabIndex = 0;
+            label1.Text = "FORMACJA";
+            label1.Click += label1_Click;
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(803, 465);
+            BackColor = Color.Beige;
+            ClientSize = new Size(1451, 888);
+            Controls.Add(label1);
+            Margin = new Padding(4, 5, 4, 5);
             Name = "Form1";
-            Text = "Form1";
+            Text = "Team Builder";
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
+
+        private Label label1;
     }
 }
