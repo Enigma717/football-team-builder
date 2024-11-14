@@ -1,6 +1,6 @@
 ﻿namespace TeamBuilder
 {
-    partial class Form1
+    partial class FormMain
     {
         /// <summary>
         ///  Required designer variable.
@@ -41,13 +41,16 @@
             labelPosition = new Label();
             labelMinPrice = new Label();
             labelMaxPrice = new Label();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            textBox3 = new TextBox();
+            textBoxCountry = new TextBox();
+            textBoxLeague = new TextBox();
+            textBoxClub = new TextBox();
             buttonAddPlayer = new Button();
             buttonDeletePlayer = new Button();
+            dataGridViewPlayers = new DataGridView();
+            richTextBoxStats = new RichTextBox();
             ((System.ComponentModel.ISupportInitialize)numericUpDownMinPrice).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownMaxPrice).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewPlayers).BeginInit();
             SuspendLayout();
             // 
             // labelTitle
@@ -194,36 +197,36 @@
             labelMaxPrice.TabIndex = 12;
             labelMaxPrice.Text = "Cena max(mln)";
             // 
-            // textBox1
+            // textBoxCountry
             // 
-            textBox1.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            textBox1.ForeColor = SystemColors.ControlDarkDark;
-            textBox1.Location = new Point(717, 150);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(80, 35);
-            textBox1.TabIndex = 13;
-            textBox1.Text = "Kraj";
-            textBox1.TextChanged += textBox1_TextChanged;
+            textBoxCountry.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            textBoxCountry.ForeColor = SystemColors.ControlDarkDark;
+            textBoxCountry.Location = new Point(717, 150);
+            textBoxCountry.Name = "textBoxCountry";
+            textBoxCountry.Size = new Size(80, 35);
+            textBoxCountry.TabIndex = 13;
+            textBoxCountry.Text = "Kraj";
+            textBoxCountry.TextChanged += textBox1_TextChanged;
             // 
-            // textBox2
+            // textBoxLeague
             // 
-            textBox2.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            textBox2.ForeColor = SystemColors.ControlDarkDark;
-            textBox2.Location = new Point(803, 150);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(96, 35);
-            textBox2.TabIndex = 14;
-            textBox2.Text = "Liga";
+            textBoxLeague.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            textBoxLeague.ForeColor = SystemColors.ControlDarkDark;
+            textBoxLeague.Location = new Point(803, 150);
+            textBoxLeague.Name = "textBoxLeague";
+            textBoxLeague.Size = new Size(96, 35);
+            textBoxLeague.TabIndex = 14;
+            textBoxLeague.Text = "Liga";
             // 
-            // textBox3
+            // textBoxClub
             // 
-            textBox3.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            textBox3.ForeColor = SystemColors.ControlDarkDark;
-            textBox3.Location = new Point(908, 150);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(96, 35);
-            textBox3.TabIndex = 15;
-            textBox3.Text = "Klub";
+            textBoxClub.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            textBoxClub.ForeColor = SystemColors.ControlDarkDark;
+            textBoxClub.Location = new Point(908, 150);
+            textBoxClub.Name = "textBoxClub";
+            textBoxClub.Size = new Size(96, 35);
+            textBoxClub.TabIndex = 15;
+            textBoxClub.Text = "Klub";
             // 
             // buttonAddPlayer
             // 
@@ -247,17 +250,36 @@
             buttonDeletePlayer.Text = "Usuń Gracza";
             buttonDeletePlayer.UseVisualStyleBackColor = false;
             // 
-            // Form1
+            // dataGridViewPlayers
+            // 
+            dataGridViewPlayers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewPlayers.Location = new Point(717, 191);
+            dataGridViewPlayers.Name = "dataGridViewPlayers";
+            dataGridViewPlayers.Size = new Size(284, 241);
+            dataGridViewPlayers.TabIndex = 19;
+            dataGridViewPlayers.CellContentClick += dataGridView1_CellContentClick;
+            // 
+            // richTextBoxStats
+            // 
+            richTextBoxStats.Location = new Point(50, 342);
+            richTextBoxStats.Name = "richTextBoxStats";
+            richTextBoxStats.Size = new Size(159, 119);
+            richTextBoxStats.TabIndex = 21;
+            richTextBoxStats.Text = "Team Stats\nOverall:\nZgranie:\nCena:";
+            // 
+            // FormMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.SkyBlue;
             ClientSize = new Size(1016, 533);
+            Controls.Add(richTextBoxStats);
+            Controls.Add(dataGridViewPlayers);
             Controls.Add(buttonDeletePlayer);
             Controls.Add(buttonAddPlayer);
-            Controls.Add(textBox3);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
+            Controls.Add(textBoxClub);
+            Controls.Add(textBoxLeague);
+            Controls.Add(textBoxCountry);
             Controls.Add(labelMaxPrice);
             Controls.Add(labelMinPrice);
             Controls.Add(labelPosition);
@@ -271,10 +293,11 @@
             Controls.Add(buttonSave);
             Controls.Add(comboBoxFormation);
             Controls.Add(labelTitle);
-            Name = "Form1";
+            Name = "FormMain";
             Text = "Team Builder";
             ((System.ComponentModel.ISupportInitialize)numericUpDownMinPrice).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownMaxPrice).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewPlayers).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -294,10 +317,12 @@
         private Label labelPosition;
         private Label labelMinPrice;
         private Label labelMaxPrice;
-        private TextBox textBox1;
-        private TextBox textBox2;
-        private TextBox textBox3;
+        private TextBox textBoxCountry;
+        private TextBox textBoxLeague;
+        private TextBox textBoxClub;
         private Button buttonAddPlayer;
         private Button buttonDeletePlayer;
+        private DataGridView dataGridViewPlayers;
+        private RichTextBox richTextBoxStats;
     }
 }
