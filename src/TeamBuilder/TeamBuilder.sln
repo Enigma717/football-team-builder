@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.9.34701.34
+VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamBuilder", "TeamBuilder.csproj", "{9C65A13B-3C03-42AD-A5FC-EA3D4A815F11}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamBuilder", "TeamBuilder.csproj", "{2F0C489C-0DA2-4A86-A5AD-00EF329DF9CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9C65A13B-3C03-42AD-A5FC-EA3D4A815F11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9C65A13B-3C03-42AD-A5FC-EA3D4A815F11}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9C65A13B-3C03-42AD-A5FC-EA3D4A815F11}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9C65A13B-3C03-42AD-A5FC-EA3D4A815F11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F0C489C-0DA2-4A86-A5AD-00EF329DF9CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F0C489C-0DA2-4A86-A5AD-00EF329DF9CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F0C489C-0DA2-4A86-A5AD-00EF329DF9CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F0C489C-0DA2-4A86-A5AD-00EF329DF9CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {F6453E59-C23D-4064-9A68-B68C67875606}
+		SolutionGuid = {3DE3C5E7-F1FA-454D-ABBB-66671F55EFAE}
 	EndGlobalSection
 EndGlobal
