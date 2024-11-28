@@ -51,5 +51,10 @@ namespace TeamBuilder
         {
 
         }
+
+        private void labelMaxPrice_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
