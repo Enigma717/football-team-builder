@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity;
+using System.Data.SQLite;
 using System.Drawing;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +19,29 @@ namespace TeamBuilder
         public FormMain()
         {
             InitializeComponent();
+
+            // TODO: Move everything below to its own location
+            string baseDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            string dbPath = Path.Combine(baseDirectory, "Players.db");
+            string connectionString = "Data Source=" + dbPath + ";Version=3;New=False";
+
+            SQLiteConnection connection;
+            connection = new SQLiteConnection(connectionString);
+            SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter("SELECT * FROM Players", connection);
+            connection.Open();
+
+            string query = "SELECT * FROM Players";
+            SQLiteCommand cmd = new SQLiteCommand(query, connection);
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
+            DataSet ds = new DataSet();
+
+            adapter.Fill(ds);
+            DataTable dt = ds.Tables[0];
+            dataGridViewPlayers.DataSource = dt;
+
+            dataGridViewPlayers.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
+
+            connection.Close();
         }
 
         private void label1_Click(object sender, EventArgs e)

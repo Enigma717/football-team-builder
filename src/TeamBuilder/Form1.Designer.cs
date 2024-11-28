@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace TeamBuilder
 {
@@ -71,7 +70,6 @@ namespace TeamBuilder
             this.labelOverall = new System.Windows.Forms.Label();
             this.labelChemistry = new System.Windows.Forms.Label();
             this.labelPrice = new System.Windows.Forms.Label();
-            this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMinPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMaxPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPlayers)).BeginInit();
@@ -520,22 +518,15 @@ namespace TeamBuilder
             this.labelPrice.TabIndex = 33;
             this.labelPrice.Text = "Cena";
             // 
-            // vScrollBar1
-            // 
-            this.vScrollBar1.Location = new System.Drawing.Point(1829, -2);
-            this.vScrollBar1.Name = "vScrollBar1";
-            this.vScrollBar1.Size = new System.Drawing.Size(10, 1659);
-            this.vScrollBar1.TabIndex = 34;
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.DarkSeaGreen;
-            this.ClientSize = new System.Drawing.Size(1838, 1649);
-            this.Controls.Add(this.vScrollBar1);
+            this.ClientSize = new System.Drawing.Size(1855, 1376);
             this.Controls.Add(this.labelPrice);
             this.Controls.Add(this.labelChemistry);
             this.Controls.Add(this.labelOverall);
@@ -619,6 +610,5 @@ namespace TeamBuilder
         private Label labelOverall;
         private Label labelChemistry;
         private Label labelPrice;
-        private VScrollBar vScrollBar1;
     }
 }
