@@ -16,71 +16,55 @@ namespace TeamBuilder
 {
     public partial class FormMain : Form
     {
-        public FormMain()
+        public FormMain(DatabaseHandler databaseHandler)
         {
+            this.databaseHandler = databaseHandler;
+
             InitializeComponent();
-
-            // TODO: Move everything below to its own location
-            string baseDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            string dbPath = Path.Combine(baseDirectory, "Players.db");
-            string connectionString = "Data Source=" + dbPath + ";Version=3;New=False";
-
-            SQLiteConnection connection;
-            connection = new SQLiteConnection(connectionString);
-            SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter("SELECT * FROM Players", connection);
-            connection.Open();
-
-            string query = "SELECT * FROM Players";
-            SQLiteCommand cmd = new SQLiteCommand(query, connection);
-            SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
-            DataSet ds = new DataSet();
-
-            adapter.Fill(ds);
-            DataTable dt = ds.Tables[0];
-            dataGridViewPlayers.DataSource = dt;
-
-            dataGridViewPlayers.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
-
-            connection.Close();
+            ResetDataGridView();
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void ResetDataGridView()
         {
+            using (SQLiteConnection connection = new SQLiteConnection(databaseHandler.ConnectionString))
+            {
+                connection.Open();
 
+                string query = "SELECT * FROM Players";
+                SQLiteCommand selectCommand = new SQLiteCommand(query, connection);
+                SQLiteDataAdapter adapter = new SQLiteDataAdapter(selectCommand);
+
+                databaseDataset = new DataSet();
+                adapter.Fill(databaseDataset);
+                DataGridViewPlayers.DataSource = databaseDataset.Tables[0];
+                DataGridViewPlayers.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
+
+                connection.Close();
+            }
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void ButtonResetFilters_Click(object sender, EventArgs e)
         {
+            using (SQLiteConnection connection = new SQLiteConnection(databaseHandler.ConnectionString))
+            {
+                connection.Open();
 
+                string query = "SELECT * FROM Players WHERE nationality_name = 'Poland'";
+                SQLiteCommand selectCommand = new SQLiteCommand(query, connection);
+                SQLiteDataAdapter adapter = new SQLiteDataAdapter(selectCommand);
+
+                databaseDataset = new DataSet();
+                adapter.Fill(databaseDataset);
+                DataGridViewPlayers.DataSource = databaseDataset.Tables[0];
+                DataGridViewPlayers.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
+
+                connection.Close();
+            }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void ButtonResetSquad_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void labelMaxPrice_Click(object sender, EventArgs e)
-        {
+            ResetDataGridView();
 
         }
     }
