@@ -67,5 +67,60 @@ namespace TeamBuilder
             ResetDataGridView();
 
         }
+
+        private void LabelPlayer6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LabelPlayer2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LabelPlayer1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TextBoxClub_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LabelOverall_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ButtonFilter_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ComboBoxPosition_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LabelPlayer10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LabelPrice_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
