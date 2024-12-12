@@ -23,6 +23,8 @@ namespace TeamBuilder
             this.databaseHandler = databaseHandler;
 
             InitializeComponent();
+            selectedLabel = labelPlayer1;
+
             ResetDataGridView();
             LoadPositions();
             LoadNationalities();
@@ -42,8 +44,8 @@ namespace TeamBuilder
 
                 databaseDataset = new DataSet();
                 adapter.Fill(databaseDataset);
-                DataGridViewPlayers.DataSource = databaseDataset.Tables[0];
-                DataGridViewPlayers.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
+                dataGridViewPlayers.DataSource = databaseDataset.Tables[0];
+                dataGridViewPlayers.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
 
                 connection.Close();
             }
@@ -67,8 +69,8 @@ namespace TeamBuilder
                 row["pozycja"] = "<brak>";
 
                 table.Rows.InsertAt(row, 0);
-                ComboBoxPosition.DataSource = databaseDataset.Tables[0];
-                ComboBoxPosition.DisplayMember = "pozycja";
+                comboBoxPosition.DataSource = databaseDataset.Tables[0];
+                comboBoxPosition.DisplayMember = "pozycja";
 
                 connection.Close();
             }
@@ -92,8 +94,8 @@ namespace TeamBuilder
                 row["kraj"] = "<brak>";
                 table.Rows.InsertAt(row, 0);
 
-                ComboBoxNationality.DataSource = databaseDataset.Tables[0];
-                ComboBoxNationality.DisplayMember = "kraj";
+                comboBoxNationality.DataSource = databaseDataset.Tables[0];
+                comboBoxNationality.DisplayMember = "kraj";
 
                 connection.Close();
             }
@@ -116,8 +118,8 @@ namespace TeamBuilder
                 row["liga"] = "<brak>";
                 table.Rows.InsertAt(row, 0);
 
-                ComboBoxLeague.DataSource = databaseDataset.Tables[0];
-                ComboBoxLeague.DisplayMember = "liga";
+                comboBoxLeague.DataSource = databaseDataset.Tables[0];
+                comboBoxLeague.DisplayMember = "liga";
 
                 connection.Close();
             }
@@ -140,8 +142,8 @@ namespace TeamBuilder
                 row["klub"] = "<brak>";
                 table.Rows.InsertAt(row, 0);
 
-                ComboBoxClub.DataSource = table;
-                ComboBoxClub.DisplayMember = "klub";
+                comboBoxClub.DataSource = table;
+                comboBoxClub.DisplayMember = "klub";
 
                 connection.Close();
             }
@@ -159,9 +161,8 @@ namespace TeamBuilder
 
                 databaseDataset = new DataSet();
                 adapter.Fill(databaseDataset);
-                DataGridViewPlayers.DataSource = databaseDataset.Tables[0];
-                DataGridViewPlayers.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
-
+                dataGridViewPlayers.DataSource = databaseDataset.Tables[0];
+                dataGridViewPlayers.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
 
                 connection.Close();
             }
@@ -174,7 +175,67 @@ namespace TeamBuilder
 
         private void ButtonAddPlayer_Click(object sender, EventArgs e)
         {
-            LabelPriceValue.Text = DataGridViewPlayers.SelectedRows[0].Cells["cena"].Value.ToString();
+            selectedLabel.Text = dataGridViewPlayers.SelectedRows[0].Cells["piłkarz"].Value.ToString();
+        }
+
+        private void ButtonDeletePlayer_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(selectedLabel.Name);
+        }
+
+        private void LabelPlayer1_Click(object sender, EventArgs e)
+        {
+            selectedLabel = sender as Label;
+        }
+
+        private void labelPlayer2_Click(object sender, EventArgs e)
+        {
+            selectedLabel = sender as Label;
+        }
+
+        private void labelPlayer3_Click(object sender, EventArgs e)
+        {
+            selectedLabel = sender as Label;
+        }
+
+        private void labelPlayer4_Click(object sender, EventArgs e)
+        {
+            selectedLabel = sender as Label;
+        }
+
+        private void labelPlayer5_Click(object sender, EventArgs e)
+        {
+            selectedLabel = sender as Label;
+        }
+
+        private void labelPlayer6_Click(object sender, EventArgs e)
+        {
+            selectedLabel = sender as Label;
+        }
+
+        private void labelPlayer7_Click(object sender, EventArgs e)
+        {
+            selectedLabel = sender as Label;
+        }
+
+        private void labelPlayer8_Click(object sender, EventArgs e)
+        {
+            selectedLabel = sender as Label;
+        }
+
+        private void labelPlayer9_Click(object sender, EventArgs e)
+        {
+            selectedLabel = sender as Label;
+        }
+
+        private void labelPlayer10_Click(object sender, EventArgs e)
+        {
+            selectedLabel = sender as Label;
+        }
+
+        private void labelPlayer11_Click(object sender, EventArgs e)
+        {
+            selectedLabel = sender as Label;
         }
     }
 }
