@@ -12,7 +12,7 @@ namespace TeamBuilder
 {
     public sealed class DatabaseHandler
     {
-        private static DatabaseHandler DatabaseInstance = new DatabaseHandler();
+        private static readonly DatabaseHandler DatabaseInstance = new DatabaseHandler();
 
         private DatabaseHandler()
         {
