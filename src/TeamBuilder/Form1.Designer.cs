@@ -45,9 +45,6 @@ namespace TeamBuilder
             this.LabelPosition = new System.Windows.Forms.Label();
             this.LabelMinPrice = new System.Windows.Forms.Label();
             this.LabelMaxPrice = new System.Windows.Forms.Label();
-            this.TextBoxCountry = new System.Windows.Forms.TextBox();
-            this.TextBoxLeague = new System.Windows.Forms.TextBox();
-            this.TextBoxClub = new System.Windows.Forms.TextBox();
             this.ButtonAddPlayer = new System.Windows.Forms.Button();
             this.ButtonDeletePlayer = new System.Windows.Forms.Button();
             this.DataGridViewPlayers = new System.Windows.Forms.DataGridView();
@@ -63,9 +60,6 @@ namespace TeamBuilder
             this.LabelPlayer3 = new System.Windows.Forms.Label();
             this.LabelPlayer2 = new System.Windows.Forms.Label();
             this.LabelPlayer1 = new System.Windows.Forms.Label();
-            this.TextBoxOverall = new System.Windows.Forms.TextBox();
-            this.TextBoxChemistry = new System.Windows.Forms.TextBox();
-            this.TextBoxPrice = new System.Windows.Forms.TextBox();
             this.LabelCountry = new System.Windows.Forms.Label();
             this.LabelLeague = new System.Windows.Forms.Label();
             this.LabelClub = new System.Windows.Forms.Label();
@@ -76,6 +70,12 @@ namespace TeamBuilder
             this.LabelFormation = new System.Windows.Forms.Label();
             this.LabelSearch = new System.Windows.Forms.Label();
             this.GroupBoxStats = new System.Windows.Forms.GroupBox();
+            this.LabelPriceValue = new System.Windows.Forms.Label();
+            this.LabelChemistryValue = new System.Windows.Forms.Label();
+            this.LabelOverallValue = new System.Windows.Forms.Label();
+            this.ComboBoxNationality = new System.Windows.Forms.ComboBox();
+            this.ComboBoxLeague = new System.Windows.Forms.ComboBox();
+            this.ComboBoxClub = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownMinPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownMaxPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewPlayers)).BeginInit();
@@ -87,11 +87,11 @@ namespace TeamBuilder
             // 
             this.LabelTitle.AutoSize = true;
             this.LabelTitle.BackColor = System.Drawing.Color.Transparent;
-            this.LabelTitle.Font = new System.Drawing.Font("ROG Fonts", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelTitle.Location = new System.Drawing.Point(237, 10);
+            this.LabelTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LabelTitle.Location = new System.Drawing.Point(324, 19);
             this.LabelTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LabelTitle.Name = "LabelTitle";
-            this.LabelTitle.Size = new System.Drawing.Size(499, 58);
+            this.LabelTitle.Size = new System.Drawing.Size(313, 55);
             this.LabelTitle.TabIndex = 0;
             this.LabelTitle.Text = "SquadBuilder";
             // 
@@ -143,19 +143,18 @@ namespace TeamBuilder
             // 
             this.ButtonResetSquad.BackColor = System.Drawing.Color.DarkGray;
             this.ButtonResetSquad.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.ButtonResetSquad.Location = new System.Drawing.Point(33, 275);
+            this.ButtonResetSquad.Location = new System.Drawing.Point(33, 284);
             this.ButtonResetSquad.Name = "ButtonResetSquad";
-            this.ButtonResetSquad.Size = new System.Drawing.Size(163, 62);
+            this.ButtonResetSquad.Size = new System.Drawing.Size(163, 53);
             this.ButtonResetSquad.TabIndex = 4;
             this.ButtonResetSquad.Text = "Reset";
             this.ButtonResetSquad.UseVisualStyleBackColor = false;
-            this.ButtonResetSquad.Click += new System.EventHandler(this.ButtonResetSquad_Click);
             // 
             // TextBoxPlayer
             // 
             this.TextBoxPlayer.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.TextBoxPlayer.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.TextBoxPlayer.Location = new System.Drawing.Point(843, 56);
+            this.TextBoxPlayer.Location = new System.Drawing.Point(866, 47);
             this.TextBoxPlayer.Name = "TextBoxPlayer";
             this.TextBoxPlayer.Size = new System.Drawing.Size(416, 35);
             this.TextBoxPlayer.TabIndex = 5;
@@ -164,9 +163,9 @@ namespace TeamBuilder
             // 
             this.ButtonResetFilters.BackColor = System.Drawing.Color.DarkGray;
             this.ButtonResetFilters.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.ButtonResetFilters.Location = new System.Drawing.Point(1277, 149);
+            this.ButtonResetFilters.Location = new System.Drawing.Point(1116, 286);
             this.ButtonResetFilters.Name = "ButtonResetFilters";
-            this.ButtonResetFilters.Size = new System.Drawing.Size(134, 51);
+            this.ButtonResetFilters.Size = new System.Drawing.Size(217, 51);
             this.ButtonResetFilters.TabIndex = 6;
             this.ButtonResetFilters.Text = "Reset";
             this.ButtonResetFilters.UseVisualStyleBackColor = false;
@@ -176,43 +175,37 @@ namespace TeamBuilder
             // 
             this.ComboBoxPosition.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ComboBoxPosition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ComboBoxPosition.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.ComboBoxPosition.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.ComboBoxPosition.FormattingEnabled = true;
-            this.ComboBoxPosition.Items.AddRange(new object[] {
-            "GK",
-            "DEF",
-            "MID",
-            "ATT"});
-            this.ComboBoxPosition.Location = new System.Drawing.Point(843, 125);
+            this.ComboBoxPosition.Location = new System.Drawing.Point(797, 126);
             this.ComboBoxPosition.Name = "ComboBoxPosition";
-            this.ComboBoxPosition.Size = new System.Drawing.Size(124, 38);
+            this.ComboBoxPosition.Size = new System.Drawing.Size(154, 29);
             this.ComboBoxPosition.TabIndex = 7;
-            this.ComboBoxPosition.SelectedIndexChanged += new System.EventHandler(this.ComboBoxPosition_SelectedIndexChanged);
             // 
             // NumericUpDownMinPrice
             // 
             this.NumericUpDownMinPrice.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.NumericUpDownMinPrice.Location = new System.Drawing.Point(994, 126);
+            this.NumericUpDownMinPrice.Location = new System.Drawing.Point(995, 125);
             this.NumericUpDownMinPrice.Maximum = new decimal(new int[] {
             200,
             0,
             0,
             0});
             this.NumericUpDownMinPrice.Name = "NumericUpDownMinPrice";
-            this.NumericUpDownMinPrice.Size = new System.Drawing.Size(123, 35);
+            this.NumericUpDownMinPrice.Size = new System.Drawing.Size(149, 35);
             this.NumericUpDownMinPrice.TabIndex = 8;
             // 
             // NumericUpDownMaxPrice
             // 
             this.NumericUpDownMaxPrice.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.NumericUpDownMaxPrice.Location = new System.Drawing.Point(1137, 126);
+            this.NumericUpDownMaxPrice.Location = new System.Drawing.Point(1185, 125);
             this.NumericUpDownMaxPrice.Maximum = new decimal(new int[] {
             200,
             0,
             0,
             0});
             this.NumericUpDownMaxPrice.Name = "NumericUpDownMaxPrice";
-            this.NumericUpDownMaxPrice.Size = new System.Drawing.Size(122, 35);
+            this.NumericUpDownMaxPrice.Size = new System.Drawing.Size(148, 35);
             this.NumericUpDownMaxPrice.TabIndex = 9;
             // 
             // LabelPosition
@@ -220,7 +213,7 @@ namespace TeamBuilder
             this.LabelPosition.AutoSize = true;
             this.LabelPosition.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.LabelPosition.ForeColor = System.Drawing.Color.Black;
-            this.LabelPosition.Location = new System.Drawing.Point(875, 97);
+            this.LabelPosition.Location = new System.Drawing.Point(837, 98);
             this.LabelPosition.Name = "LabelPosition";
             this.LabelPosition.Size = new System.Drawing.Size(75, 25);
             this.LabelPosition.TabIndex = 10;
@@ -231,7 +224,7 @@ namespace TeamBuilder
             this.LabelMinPrice.AutoSize = true;
             this.LabelMinPrice.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.LabelMinPrice.ForeColor = System.Drawing.Color.Black;
-            this.LabelMinPrice.Location = new System.Drawing.Point(1009, 97);
+            this.LabelMinPrice.Location = new System.Drawing.Point(1025, 97);
             this.LabelMinPrice.Name = "LabelMinPrice";
             this.LabelMinPrice.Size = new System.Drawing.Size(92, 25);
             this.LabelMinPrice.TabIndex = 11;
@@ -242,39 +235,11 @@ namespace TeamBuilder
             this.LabelMaxPrice.AutoSize = true;
             this.LabelMaxPrice.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.LabelMaxPrice.ForeColor = System.Drawing.Color.Black;
-            this.LabelMaxPrice.Location = new System.Drawing.Point(1150, 98);
+            this.LabelMaxPrice.Location = new System.Drawing.Point(1208, 98);
             this.LabelMaxPrice.Name = "LabelMaxPrice";
             this.LabelMaxPrice.Size = new System.Drawing.Size(95, 25);
             this.LabelMaxPrice.TabIndex = 12;
             this.LabelMaxPrice.Text = "Cena max";
-            // 
-            // TextBoxCountry
-            // 
-            this.TextBoxCountry.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.TextBoxCountry.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.TextBoxCountry.Location = new System.Drawing.Point(843, 193);
-            this.TextBoxCountry.Name = "TextBoxCountry";
-            this.TextBoxCountry.Size = new System.Drawing.Size(124, 35);
-            this.TextBoxCountry.TabIndex = 13;
-            // 
-            // TextBoxLeague
-            // 
-            this.TextBoxLeague.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.TextBoxLeague.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.TextBoxLeague.Location = new System.Drawing.Point(991, 193);
-            this.TextBoxLeague.Name = "TextBoxLeague";
-            this.TextBoxLeague.Size = new System.Drawing.Size(134, 35);
-            this.TextBoxLeague.TabIndex = 14;
-            // 
-            // TextBoxClub
-            // 
-            this.TextBoxClub.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.TextBoxClub.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.TextBoxClub.Location = new System.Drawing.Point(1143, 193);
-            this.TextBoxClub.Name = "TextBoxClub";
-            this.TextBoxClub.Size = new System.Drawing.Size(116, 35);
-            this.TextBoxClub.TabIndex = 15;
-            this.TextBoxClub.TextChanged += new System.EventHandler(this.TextBoxClub_TextChanged);
             // 
             // ButtonAddPlayer
             // 
@@ -286,6 +251,7 @@ namespace TeamBuilder
             this.ButtonAddPlayer.TabIndex = 16;
             this.ButtonAddPlayer.Text = "Dodaj gracza";
             this.ButtonAddPlayer.UseVisualStyleBackColor = false;
+            this.ButtonAddPlayer.Click += new System.EventHandler(this.ButtonAddPlayer_Click);
             // 
             // ButtonDeletePlayer
             // 
@@ -302,12 +268,11 @@ namespace TeamBuilder
             // 
             this.DataGridViewPlayers.AllowUserToAddRows = false;
             this.DataGridViewPlayers.AllowUserToDeleteRows = false;
-            this.DataGridViewPlayers.AllowUserToResizeColumns = false;
             this.DataGridViewPlayers.AllowUserToResizeRows = false;
-            this.DataGridViewPlayers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.DataGridViewPlayers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.DataGridViewPlayers.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.DataGridViewPlayers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DataGridViewPlayers.Location = new System.Drawing.Point(756, 234);
+            this.DataGridViewPlayers.Location = new System.Drawing.Point(756, 382);
             this.DataGridViewPlayers.MultiSelect = false;
             this.DataGridViewPlayers.Name = "DataGridViewPlayers";
             this.DataGridViewPlayers.ReadOnly = true;
@@ -315,7 +280,7 @@ namespace TeamBuilder
             this.DataGridViewPlayers.RowHeadersWidth = 20;
             this.DataGridViewPlayers.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.DataGridViewPlayers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DataGridViewPlayers.Size = new System.Drawing.Size(633, 555);
+            this.DataGridViewPlayers.Size = new System.Drawing.Size(633, 407);
             this.DataGridViewPlayers.TabIndex = 19;
             // 
             // GroupBoxTeam
@@ -344,7 +309,7 @@ namespace TeamBuilder
             // 
             this.LabelPlayer11.AutoSize = true;
             this.LabelPlayer11.BackColor = System.Drawing.Color.Transparent;
-            this.LabelPlayer11.Location = new System.Drawing.Point(56, 183);
+            this.LabelPlayer11.Location = new System.Drawing.Point(94, 183);
             this.LabelPlayer11.Name = "LabelPlayer11";
             this.LabelPlayer11.Size = new System.Drawing.Size(51, 26);
             this.LabelPlayer11.TabIndex = 10;
@@ -359,7 +324,6 @@ namespace TeamBuilder
             this.LabelPlayer10.Size = new System.Drawing.Size(51, 26);
             this.LabelPlayer10.TabIndex = 9;
             this.LabelPlayer10.Text = "ATT";
-            this.LabelPlayer10.Click += new System.EventHandler(this.LabelPlayer10_Click);
             // 
             // LabelPlayer9
             // 
@@ -400,7 +364,6 @@ namespace TeamBuilder
             this.LabelPlayer6.Size = new System.Drawing.Size(52, 26);
             this.LabelPlayer6.TabIndex = 5;
             this.LabelPlayer6.Text = "MID";
-            this.LabelPlayer6.Click += new System.EventHandler(this.LabelPlayer6_Click);
             // 
             // LabelPlayer5
             // 
@@ -441,7 +404,6 @@ namespace TeamBuilder
             this.LabelPlayer2.Size = new System.Drawing.Size(56, 26);
             this.LabelPlayer2.TabIndex = 1;
             this.LabelPlayer2.Text = "DEF";
-            this.LabelPlayer2.Click += new System.EventHandler(this.LabelPlayer2_Click);
             // 
             // LabelPlayer1
             // 
@@ -452,44 +414,13 @@ namespace TeamBuilder
             this.LabelPlayer1.Size = new System.Drawing.Size(44, 26);
             this.LabelPlayer1.TabIndex = 0;
             this.LabelPlayer1.Text = "GK";
-            this.LabelPlayer1.Click += new System.EventHandler(this.LabelPlayer1_Click);
-            // 
-            // TextBoxOverall
-            // 
-            this.TextBoxOverall.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.TextBoxOverall.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.TextBoxOverall.Location = new System.Drawing.Point(92, 28);
-            this.TextBoxOverall.Name = "TextBoxOverall";
-            this.TextBoxOverall.Size = new System.Drawing.Size(93, 35);
-            this.TextBoxOverall.TabIndex = 21;
-            this.TextBoxOverall.Text = "Overall";
-            // 
-            // TextBoxChemistry
-            // 
-            this.TextBoxChemistry.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.TextBoxChemistry.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.TextBoxChemistry.Location = new System.Drawing.Point(92, 74);
-            this.TextBoxChemistry.Name = "TextBoxChemistry";
-            this.TextBoxChemistry.Size = new System.Drawing.Size(93, 35);
-            this.TextBoxChemistry.TabIndex = 22;
-            this.TextBoxChemistry.Text = "Zgranie";
-            // 
-            // TextBoxPrice
-            // 
-            this.TextBoxPrice.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.TextBoxPrice.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.TextBoxPrice.Location = new System.Drawing.Point(92, 120);
-            this.TextBoxPrice.Name = "TextBoxPrice";
-            this.TextBoxPrice.Size = new System.Drawing.Size(93, 35);
-            this.TextBoxPrice.TabIndex = 23;
-            this.TextBoxPrice.Text = "Cena";
             // 
             // LabelCountry
             // 
             this.LabelCountry.AutoSize = true;
             this.LabelCountry.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.LabelCountry.ForeColor = System.Drawing.Color.Black;
-            this.LabelCountry.Location = new System.Drawing.Point(884, 165);
+            this.LabelCountry.Location = new System.Drawing.Point(912, 169);
             this.LabelCountry.Name = "LabelCountry";
             this.LabelCountry.Size = new System.Drawing.Size(45, 25);
             this.LabelCountry.TabIndex = 28;
@@ -500,7 +431,7 @@ namespace TeamBuilder
             this.LabelLeague.AutoSize = true;
             this.LabelLeague.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.LabelLeague.ForeColor = System.Drawing.Color.Black;
-            this.LabelLeague.Location = new System.Drawing.Point(1033, 164);
+            this.LabelLeague.Location = new System.Drawing.Point(912, 232);
             this.LabelLeague.Name = "LabelLeague";
             this.LabelLeague.Size = new System.Drawing.Size(47, 25);
             this.LabelLeague.TabIndex = 29;
@@ -511,7 +442,7 @@ namespace TeamBuilder
             this.LabelClub.AutoSize = true;
             this.LabelClub.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.LabelClub.ForeColor = System.Drawing.Color.Black;
-            this.LabelClub.Location = new System.Drawing.Point(1172, 166);
+            this.LabelClub.Location = new System.Drawing.Point(912, 291);
             this.LabelClub.Name = "LabelClub";
             this.LabelClub.Size = new System.Drawing.Size(50, 25);
             this.LabelClub.TabIndex = 30;
@@ -528,11 +459,11 @@ namespace TeamBuilder
             this.LabelOverall.Size = new System.Drawing.Size(72, 25);
             this.LabelOverall.TabIndex = 31;
             this.LabelOverall.Text = "Overall";
-            this.LabelOverall.Click += new System.EventHandler(this.LabelOverall_Click);
             // 
             // LabelChemistry
             // 
             this.LabelChemistry.AutoSize = true;
+            this.LabelChemistry.BackColor = System.Drawing.Color.Transparent;
             this.LabelChemistry.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.LabelChemistry.ForeColor = System.Drawing.Color.Black;
             this.LabelChemistry.Location = new System.Drawing.Point(9, 81);
@@ -544,6 +475,7 @@ namespace TeamBuilder
             // LabelPrice
             // 
             this.LabelPrice.AutoSize = true;
+            this.LabelPrice.BackColor = System.Drawing.Color.Transparent;
             this.LabelPrice.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.LabelPrice.ForeColor = System.Drawing.Color.Black;
             this.LabelPrice.Location = new System.Drawing.Point(12, 127);
@@ -551,15 +483,14 @@ namespace TeamBuilder
             this.LabelPrice.Size = new System.Drawing.Size(55, 25);
             this.LabelPrice.TabIndex = 33;
             this.LabelPrice.Text = "Cena";
-            this.LabelPrice.Click += new System.EventHandler(this.LabelPrice_Click);
             // 
             // ButtonFilter
             // 
             this.ButtonFilter.BackColor = System.Drawing.Color.DarkGray;
             this.ButtonFilter.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.ButtonFilter.Location = new System.Drawing.Point(1277, 83);
+            this.ButtonFilter.Location = new System.Drawing.Point(1116, 207);
             this.ButtonFilter.Name = "ButtonFilter";
-            this.ButtonFilter.Size = new System.Drawing.Size(134, 50);
+            this.ButtonFilter.Size = new System.Drawing.Size(217, 50);
             this.ButtonFilter.TabIndex = 34;
             this.ButtonFilter.Text = "Filtruj";
             this.ButtonFilter.UseVisualStyleBackColor = false;
@@ -571,7 +502,7 @@ namespace TeamBuilder
             this.LabelFormation.BackColor = System.Drawing.Color.Transparent;
             this.LabelFormation.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.LabelFormation.ForeColor = System.Drawing.Color.Black;
-            this.LabelFormation.Location = new System.Drawing.Point(79, 63);
+            this.LabelFormation.Location = new System.Drawing.Point(71, 69);
             this.LabelFormation.Name = "LabelFormation";
             this.LabelFormation.Size = new System.Drawing.Size(89, 25);
             this.LabelFormation.TabIndex = 35;
@@ -583,29 +514,111 @@ namespace TeamBuilder
             this.LabelSearch.BackColor = System.Drawing.Color.Transparent;
             this.LabelSearch.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.LabelSearch.ForeColor = System.Drawing.Color.Black;
-            this.LabelSearch.Location = new System.Drawing.Point(994, 19);
+            this.LabelSearch.Location = new System.Drawing.Point(1007, 19);
             this.LabelSearch.Name = "LabelSearch";
             this.LabelSearch.Size = new System.Drawing.Size(131, 25);
             this.LabelSearch.TabIndex = 36;
             this.LabelSearch.Text = "Wyszukiwanie";
-            this.LabelSearch.Click += new System.EventHandler(this.label1_Click);
             // 
             // GroupBoxStats
             // 
             this.GroupBoxStats.BackColor = System.Drawing.Color.Gray;
+            this.GroupBoxStats.Controls.Add(this.LabelPriceValue);
+            this.GroupBoxStats.Controls.Add(this.LabelChemistryValue);
+            this.GroupBoxStats.Controls.Add(this.LabelOverallValue);
             this.GroupBoxStats.Controls.Add(this.LabelPrice);
             this.GroupBoxStats.Controls.Add(this.LabelChemistry);
             this.GroupBoxStats.Controls.Add(this.LabelOverall);
-            this.GroupBoxStats.Controls.Add(this.TextBoxPrice);
-            this.GroupBoxStats.Controls.Add(this.TextBoxChemistry);
-            this.GroupBoxStats.Controls.Add(this.TextBoxOverall);
             this.GroupBoxStats.Location = new System.Drawing.Point(24, 382);
             this.GroupBoxStats.Name = "GroupBoxStats";
             this.GroupBoxStats.Size = new System.Drawing.Size(201, 184);
             this.GroupBoxStats.TabIndex = 37;
             this.GroupBoxStats.TabStop = false;
             this.GroupBoxStats.Text = "Statystyki drużyny";
-            this.GroupBoxStats.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // LabelPriceValue
+            // 
+            this.LabelPriceValue.AutoSize = true;
+            this.LabelPriceValue.BackColor = System.Drawing.Color.Transparent;
+            this.LabelPriceValue.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.LabelPriceValue.ForeColor = System.Drawing.Color.Black;
+            this.LabelPriceValue.Location = new System.Drawing.Point(90, 127);
+            this.LabelPriceValue.Name = "LabelPriceValue";
+            this.LabelPriceValue.Size = new System.Drawing.Size(22, 25);
+            this.LabelPriceValue.TabIndex = 36;
+            this.LabelPriceValue.Text = "0";
+            // 
+            // LabelChemistryValue
+            // 
+            this.LabelChemistryValue.AutoSize = true;
+            this.LabelChemistryValue.BackColor = System.Drawing.Color.Transparent;
+            this.LabelChemistryValue.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.LabelChemistryValue.ForeColor = System.Drawing.Color.Black;
+            this.LabelChemistryValue.Location = new System.Drawing.Point(90, 81);
+            this.LabelChemistryValue.Name = "LabelChemistryValue";
+            this.LabelChemistryValue.Size = new System.Drawing.Size(22, 25);
+            this.LabelChemistryValue.TabIndex = 35;
+            this.LabelChemistryValue.Text = "0";
+            // 
+            // LabelOverallValue
+            // 
+            this.LabelOverallValue.AutoSize = true;
+            this.LabelOverallValue.BackColor = System.Drawing.Color.Transparent;
+            this.LabelOverallValue.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.LabelOverallValue.ForeColor = System.Drawing.Color.Black;
+            this.LabelOverallValue.Location = new System.Drawing.Point(90, 35);
+            this.LabelOverallValue.Name = "LabelOverallValue";
+            this.LabelOverallValue.Size = new System.Drawing.Size(22, 25);
+            this.LabelOverallValue.TabIndex = 34;
+            this.LabelOverallValue.Text = "0";
+            // 
+            // ComboBoxNationality
+            // 
+            this.ComboBoxNationality.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.ComboBoxNationality.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ComboBoxNationality.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.ComboBoxNationality.FormattingEnabled = true;
+            this.ComboBoxNationality.Items.AddRange(new object[] {
+            "GK",
+            "DEF",
+            "MID",
+            "ATT"});
+            this.ComboBoxNationality.Location = new System.Drawing.Point(797, 197);
+            this.ComboBoxNationality.Name = "ComboBoxNationality";
+            this.ComboBoxNationality.Size = new System.Drawing.Size(280, 29);
+            this.ComboBoxNationality.TabIndex = 38;
+            // 
+            // ComboBoxLeague
+            // 
+            this.ComboBoxLeague.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.ComboBoxLeague.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ComboBoxLeague.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.ComboBoxLeague.FormattingEnabled = true;
+            this.ComboBoxLeague.Items.AddRange(new object[] {
+            "GK",
+            "DEF",
+            "MID",
+            "ATT"});
+            this.ComboBoxLeague.Location = new System.Drawing.Point(797, 259);
+            this.ComboBoxLeague.Name = "ComboBoxLeague";
+            this.ComboBoxLeague.Size = new System.Drawing.Size(280, 29);
+            this.ComboBoxLeague.TabIndex = 39;
+            // 
+            // ComboBoxClub
+            // 
+            this.ComboBoxClub.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.ComboBoxClub.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ComboBoxClub.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.ComboBoxClub.FormattingEnabled = true;
+            this.ComboBoxClub.Items.AddRange(new object[] {
+            "GK",
+            "DEF",
+            "MID",
+            "ATT"});
+            this.ComboBoxClub.Location = new System.Drawing.Point(797, 318);
+            this.ComboBoxClub.Name = "ComboBoxClub";
+            this.ComboBoxClub.Size = new System.Drawing.Size(280, 29);
+            this.ComboBoxClub.TabIndex = 40;
             // 
             // FormMain
             // 
@@ -615,6 +628,9 @@ namespace TeamBuilder
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.SkyBlue;
             this.ClientSize = new System.Drawing.Size(1418, 818);
+            this.Controls.Add(this.ComboBoxClub);
+            this.Controls.Add(this.ComboBoxLeague);
+            this.Controls.Add(this.ComboBoxNationality);
             this.Controls.Add(this.GroupBoxStats);
             this.Controls.Add(this.LabelSearch);
             this.Controls.Add(this.LabelFormation);
@@ -626,9 +642,6 @@ namespace TeamBuilder
             this.Controls.Add(this.DataGridViewPlayers);
             this.Controls.Add(this.ButtonDeletePlayer);
             this.Controls.Add(this.ButtonAddPlayer);
-            this.Controls.Add(this.TextBoxClub);
-            this.Controls.Add(this.TextBoxLeague);
-            this.Controls.Add(this.TextBoxCountry);
             this.Controls.Add(this.LabelMaxPrice);
             this.Controls.Add(this.LabelMinPrice);
             this.Controls.Add(this.LabelPosition);
@@ -672,9 +685,6 @@ namespace TeamBuilder
         private Label LabelPosition;
         private Label LabelMinPrice;
         private Label LabelMaxPrice;
-        private TextBox TextBoxCountry;
-        private TextBox TextBoxLeague;
-        private TextBox TextBoxClub;
         private Button ButtonAddPlayer;
         private Button ButtonDeletePlayer;
         private DataGridView DataGridViewPlayers;
@@ -690,9 +700,6 @@ namespace TeamBuilder
         private Label LabelPlayer3;
         private Label LabelPlayer2;
         private Label LabelPlayer1;
-        private TextBox TextBoxOverall;
-        private TextBox TextBoxChemistry;
-        private TextBox TextBoxPrice;
         private Label LabelCountry;
         private Label LabelLeague;
         private Label LabelClub;
@@ -706,5 +713,11 @@ namespace TeamBuilder
         private Label LabelFormation;
         private Label LabelSearch;
         private GroupBox GroupBoxStats;
+        private ComboBox ComboBoxNationality;
+        private ComboBox ComboBoxLeague;
+        private ComboBox ComboBoxClub;
+        private Label LabelPriceValue;
+        private Label LabelChemistryValue;
+        private Label LabelOverallValue;
     }
 }

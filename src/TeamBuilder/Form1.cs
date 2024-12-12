@@ -11,6 +11,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace TeamBuilder
 {
@@ -22,6 +24,10 @@ namespace TeamBuilder
 
             InitializeComponent();
             ResetDataGridView();
+            LoadPositions();
+            LoadNationalities();
+            LoadLeagues();
+            LoadClubs();
         }
 
         private void ResetDataGridView()
@@ -43,13 +49,111 @@ namespace TeamBuilder
             }
         }
 
-        private void ButtonResetFilters_Click(object sender, EventArgs e)
+        private void LoadPositions()
         {
             using (SQLiteConnection connection = new SQLiteConnection(databaseHandler.ConnectionString))
             {
                 connection.Open();
 
-                string query = "SELECT * FROM Players WHERE nationality_name = 'Poland'";
+                string query = "SELECT DISTINCT pozycja FROM Players ORDER BY pozycja ASC";
+                SQLiteCommand selectCommand = new SQLiteCommand(query, connection);
+                SQLiteDataAdapter adapter = new SQLiteDataAdapter(selectCommand);
+
+                databaseDataset = new DataSet();
+                adapter.Fill(databaseDataset);
+
+                DataTable table = databaseDataset.Tables[0];
+                DataRow row = table.NewRow();
+                row["pozycja"] = "<brak>";
+
+                table.Rows.InsertAt(row, 0);
+                ComboBoxPosition.DataSource = databaseDataset.Tables[0];
+                ComboBoxPosition.DisplayMember = "pozycja";
+
+                connection.Close();
+            }
+        }
+
+        private void LoadNationalities()
+        {
+            using (SQLiteConnection connection = new SQLiteConnection(databaseHandler.ConnectionString))
+            {
+                connection.Open();
+
+                string query = "SELECT DISTINCT kraj FROM Players ORDER BY kraj ASC";
+                SQLiteCommand selectCommand = new SQLiteCommand(query, connection);
+                SQLiteDataAdapter adapter = new SQLiteDataAdapter(selectCommand);
+
+                databaseDataset = new DataSet();
+                adapter.Fill(databaseDataset);
+
+                DataTable table = databaseDataset.Tables[0];
+                DataRow row = table.NewRow();
+                row["kraj"] = "<brak>";
+                table.Rows.InsertAt(row, 0);
+
+                ComboBoxNationality.DataSource = databaseDataset.Tables[0];
+                ComboBoxNationality.DisplayMember = "kraj";
+
+                connection.Close();
+            }
+        }
+        private void LoadLeagues()
+        {
+            using (SQLiteConnection connection = new SQLiteConnection(databaseHandler.ConnectionString))
+            {
+                connection.Open();
+
+                string query = "SELECT DISTINCT liga FROM Players ORDER BY liga ASC";
+                SQLiteCommand selectCommand = new SQLiteCommand(query, connection);
+                SQLiteDataAdapter adapter = new SQLiteDataAdapter(selectCommand);
+
+                databaseDataset = new DataSet();
+                adapter.Fill(databaseDataset);
+
+                DataTable table = databaseDataset.Tables[0];
+                DataRow row = table.NewRow();
+                row["liga"] = "<brak>";
+                table.Rows.InsertAt(row, 0);
+
+                ComboBoxLeague.DataSource = databaseDataset.Tables[0];
+                ComboBoxLeague.DisplayMember = "liga";
+
+                connection.Close();
+            }
+        }
+        private void LoadClubs()
+        {
+            using (SQLiteConnection connection = new SQLiteConnection(databaseHandler.ConnectionString))
+            {
+                connection.Open();
+
+                string query = "SELECT DISTINCT klub FROM Players ORDER BY klub ASC";
+                SQLiteCommand selectCommand = new SQLiteCommand(query, connection);
+                SQLiteDataAdapter adapter = new SQLiteDataAdapter(selectCommand);
+
+                databaseDataset = new DataSet();
+                adapter.Fill(databaseDataset);
+
+                DataTable table = databaseDataset.Tables[0];
+                DataRow row = table.NewRow();
+                row["klub"] = "<brak>";
+                table.Rows.InsertAt(row, 0);
+
+                ComboBoxClub.DataSource = table;
+                ComboBoxClub.DisplayMember = "klub";
+
+                connection.Close();
+            }
+        }
+
+        private void ButtonFilter_Click(object sender, EventArgs e)
+        {
+            using (SQLiteConnection connection = new SQLiteConnection(databaseHandler.ConnectionString))
+            {
+                connection.Open();
+
+                string query = "SELECT * FROM Players WHERE kraj = 'Poland'";
                 SQLiteCommand selectCommand = new SQLiteCommand(query, connection);
                 SQLiteDataAdapter adapter = new SQLiteDataAdapter(selectCommand);
 
@@ -58,69 +162,19 @@ namespace TeamBuilder
                 DataGridViewPlayers.DataSource = databaseDataset.Tables[0];
                 DataGridViewPlayers.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
 
+
                 connection.Close();
             }
         }
 
-        private void ButtonResetSquad_Click(object sender, EventArgs e)
+        private void ButtonResetFilters_Click(object sender, EventArgs e)
         {
             ResetDataGridView();
-
         }
 
-        private void LabelPlayer6_Click(object sender, EventArgs e)
+        private void ButtonAddPlayer_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void LabelPlayer2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void LabelPlayer1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void TextBoxClub_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void LabelOverall_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ButtonFilter_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ComboBoxPosition_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void LabelPlayer10_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void LabelPrice_Click(object sender, EventArgs e)
-        {
-
+            LabelPriceValue.Text = DataGridViewPlayers.SelectedRows[0].Cells["cena"].Value.ToString();
         }
     }
 }
