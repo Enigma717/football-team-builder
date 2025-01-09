@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Runtime.CompilerServices;
@@ -15,6 +16,7 @@ namespace TeamBuilder
 
         private const string NOT_SELECTED_ITEM = "<brak>";
         private const string DEFAULT_QUERY = "SELECT * FROM Players";
+        private const string DEFAULT_FILTER_QUERY = "SELECT * FROM Players WHERE";
 
         /// <summary>
         ///  Clean up any resources being used.
@@ -192,9 +194,14 @@ namespace TeamBuilder
             // numericUpDownMinPrice
             // 
             this.numericUpDownMinPrice.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.numericUpDownMinPrice.Increment = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.numericUpDownMinPrice.Location = new System.Drawing.Point(995, 125);
             this.numericUpDownMinPrice.Maximum = new decimal(new int[] {
-            200,
+            200000000,
             0,
             0,
             0});
@@ -205,9 +212,14 @@ namespace TeamBuilder
             // numericUpDownMaxPrice
             // 
             this.numericUpDownMaxPrice.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.numericUpDownMaxPrice.Increment = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.numericUpDownMaxPrice.Location = new System.Drawing.Point(1185, 125);
             this.numericUpDownMaxPrice.Maximum = new decimal(new int[] {
-            200,
+            200000000,
             0,
             0,
             0});
@@ -316,7 +328,7 @@ namespace TeamBuilder
             // labelPlayer11
             // 
             this.labelPlayer11.BackColor = System.Drawing.Color.Transparent;
-            this.labelPlayer11.DefaultText = null;
+            this.labelPlayer11.DefaultPosition = null;
             this.labelPlayer11.Location = new System.Drawing.Point(24, 184);
             this.labelPlayer11.Name = "labelPlayer11";
             this.labelPlayer11.PlayerChemistry = 0;
@@ -336,7 +348,7 @@ namespace TeamBuilder
             // labelPlayer10
             // 
             this.labelPlayer10.BackColor = System.Drawing.Color.Transparent;
-            this.labelPlayer10.DefaultText = null;
+            this.labelPlayer10.DefaultPosition = null;
             this.labelPlayer10.Location = new System.Drawing.Point(260, 184);
             this.labelPlayer10.Name = "labelPlayer10";
             this.labelPlayer10.PlayerChemistry = 0;
@@ -356,7 +368,7 @@ namespace TeamBuilder
             // labelPlayer9
             // 
             this.labelPlayer9.BackColor = System.Drawing.Color.Transparent;
-            this.labelPlayer9.DefaultText = null;
+            this.labelPlayer9.DefaultPosition = null;
             this.labelPlayer9.Location = new System.Drawing.Point(129, 116);
             this.labelPlayer9.Name = "labelPlayer9";
             this.labelPlayer9.PlayerChemistry = 0;
@@ -376,7 +388,7 @@ namespace TeamBuilder
             // labelPlayer8
             // 
             this.labelPlayer8.BackColor = System.Drawing.Color.Transparent;
-            this.labelPlayer8.DefaultText = null;
+            this.labelPlayer8.DefaultPosition = null;
             this.labelPlayer8.Location = new System.Drawing.Point(24, 325);
             this.labelPlayer8.Name = "labelPlayer8";
             this.labelPlayer8.PlayerChemistry = 0;
@@ -396,8 +408,8 @@ namespace TeamBuilder
             // labelPlayer7
             // 
             this.labelPlayer7.BackColor = System.Drawing.Color.Transparent;
-            this.labelPlayer7.DefaultText = null;
-            this.labelPlayer7.Location = new System.Drawing.Point(138, 395);
+            this.labelPlayer7.DefaultPosition = null;
+            this.labelPlayer7.Location = new System.Drawing.Point(129, 395);
             this.labelPlayer7.Name = "labelPlayer7";
             this.labelPlayer7.PlayerChemistry = 0;
             this.labelPlayer7.PlayerClub = null;
@@ -416,7 +428,7 @@ namespace TeamBuilder
             // labelPlayer6
             // 
             this.labelPlayer6.BackColor = System.Drawing.Color.Transparent;
-            this.labelPlayer6.DefaultText = null;
+            this.labelPlayer6.DefaultPosition = null;
             this.labelPlayer6.Location = new System.Drawing.Point(266, 326);
             this.labelPlayer6.Name = "labelPlayer6";
             this.labelPlayer6.PlayerChemistry = 0;
@@ -436,7 +448,7 @@ namespace TeamBuilder
             // labelPlayer5
             // 
             this.labelPlayer5.BackColor = System.Drawing.Color.Transparent;
-            this.labelPlayer5.DefaultText = null;
+            this.labelPlayer5.DefaultPosition = null;
             this.labelPlayer5.Location = new System.Drawing.Point(6, 481);
             this.labelPlayer5.Name = "labelPlayer5";
             this.labelPlayer5.PlayerChemistry = 0;
@@ -456,7 +468,7 @@ namespace TeamBuilder
             // labelPlayer4
             // 
             this.labelPlayer4.BackColor = System.Drawing.Color.Transparent;
-            this.labelPlayer4.DefaultText = null;
+            this.labelPlayer4.DefaultPosition = null;
             this.labelPlayer4.Location = new System.Drawing.Point(38, 555);
             this.labelPlayer4.Name = "labelPlayer4";
             this.labelPlayer4.PlayerChemistry = 0;
@@ -476,7 +488,7 @@ namespace TeamBuilder
             // labelPlayer3
             // 
             this.labelPlayer3.BackColor = System.Drawing.Color.Transparent;
-            this.labelPlayer3.DefaultText = null;
+            this.labelPlayer3.DefaultPosition = null;
             this.labelPlayer3.Location = new System.Drawing.Point(243, 555);
             this.labelPlayer3.Name = "labelPlayer3";
             this.labelPlayer3.PlayerChemistry = 0;
@@ -496,7 +508,7 @@ namespace TeamBuilder
             // labelPlayer2
             // 
             this.labelPlayer2.BackColor = System.Drawing.Color.Transparent;
-            this.labelPlayer2.DefaultText = null;
+            this.labelPlayer2.DefaultPosition = null;
             this.labelPlayer2.Location = new System.Drawing.Point(266, 481);
             this.labelPlayer2.Name = "labelPlayer2";
             this.labelPlayer2.PlayerChemistry = 0;
@@ -516,7 +528,7 @@ namespace TeamBuilder
             // labelPlayer1
             // 
             this.labelPlayer1.BackColor = System.Drawing.Color.Transparent;
-            this.labelPlayer1.DefaultText = null;
+            this.labelPlayer1.DefaultPosition = null;
             this.labelPlayer1.Location = new System.Drawing.Point(138, 636);
             this.labelPlayer1.Name = "labelPlayer1";
             this.labelPlayer1.PlayerChemistry = 0;
@@ -570,9 +582,9 @@ namespace TeamBuilder
             // 
             this.labelOverall.AutoSize = true;
             this.labelOverall.BackColor = System.Drawing.Color.Transparent;
-            this.labelOverall.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelOverall.Font = new System.Drawing.Font("Segoe UI", 14F);
             this.labelOverall.ForeColor = System.Drawing.Color.Black;
-            this.labelOverall.Location = new System.Drawing.Point(12, 35);
+            this.labelOverall.Location = new System.Drawing.Point(64, 15);
             this.labelOverall.Name = "labelOverall";
             this.labelOverall.Size = new System.Drawing.Size(72, 25);
             this.labelOverall.TabIndex = 31;
@@ -582,9 +594,9 @@ namespace TeamBuilder
             // 
             this.labelChemistry.AutoSize = true;
             this.labelChemistry.BackColor = System.Drawing.Color.Transparent;
-            this.labelChemistry.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelChemistry.Font = new System.Drawing.Font("Segoe UI", 14F);
             this.labelChemistry.ForeColor = System.Drawing.Color.Black;
-            this.labelChemistry.Location = new System.Drawing.Point(9, 81);
+            this.labelChemistry.Location = new System.Drawing.Point(63, 82);
             this.labelChemistry.Name = "labelChemistry";
             this.labelChemistry.Size = new System.Drawing.Size(77, 25);
             this.labelChemistry.TabIndex = 32;
@@ -594,9 +606,9 @@ namespace TeamBuilder
             // 
             this.labelPrice.AutoSize = true;
             this.labelPrice.BackColor = System.Drawing.Color.Transparent;
-            this.labelPrice.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelPrice.Font = new System.Drawing.Font("Segoe UI", 14F);
             this.labelPrice.ForeColor = System.Drawing.Color.Black;
-            this.labelPrice.Location = new System.Drawing.Point(12, 127);
+            this.labelPrice.Location = new System.Drawing.Point(71, 148);
             this.labelPrice.Name = "labelPrice";
             this.labelPrice.Size = new System.Drawing.Size(55, 25);
             this.labelPrice.TabIndex = 33;
@@ -647,48 +659,48 @@ namespace TeamBuilder
             this.groupBoxStats.Controls.Add(this.labelPrice);
             this.groupBoxStats.Controls.Add(this.labelChemistry);
             this.groupBoxStats.Controls.Add(this.labelOverall);
-            this.groupBoxStats.Location = new System.Drawing.Point(17, 382);
+            this.groupBoxStats.Location = new System.Drawing.Point(17, 364);
             this.groupBoxStats.Name = "groupBoxStats";
-            this.groupBoxStats.Size = new System.Drawing.Size(201, 184);
+            this.groupBoxStats.Size = new System.Drawing.Size(201, 216);
             this.groupBoxStats.TabIndex = 37;
             this.groupBoxStats.TabStop = false;
             this.groupBoxStats.Text = "Statystyki drużyny";
             // 
             // labelPriceValue
             // 
-            this.labelPriceValue.AutoSize = true;
             this.labelPriceValue.BackColor = System.Drawing.Color.Transparent;
-            this.labelPriceValue.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelPriceValue.Font = new System.Drawing.Font("Segoe UI", 14F);
             this.labelPriceValue.ForeColor = System.Drawing.Color.Black;
-            this.labelPriceValue.Location = new System.Drawing.Point(90, 127);
+            this.labelPriceValue.Location = new System.Drawing.Point(0, 173);
             this.labelPriceValue.Name = "labelPriceValue";
-            this.labelPriceValue.Size = new System.Drawing.Size(22, 25);
+            this.labelPriceValue.Size = new System.Drawing.Size(200, 25);
             this.labelPriceValue.TabIndex = 36;
-            this.labelPriceValue.Text = "0";
+            this.labelPriceValue.Text = "0 mln €";
+            this.labelPriceValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // labelChemistryValue
             // 
-            this.labelChemistryValue.AutoSize = true;
             this.labelChemistryValue.BackColor = System.Drawing.Color.Transparent;
-            this.labelChemistryValue.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelChemistryValue.Font = new System.Drawing.Font("Segoe UI", 14F);
             this.labelChemistryValue.ForeColor = System.Drawing.Color.Black;
-            this.labelChemistryValue.Location = new System.Drawing.Point(90, 81);
+            this.labelChemistryValue.Location = new System.Drawing.Point(0, 107);
             this.labelChemistryValue.Name = "labelChemistryValue";
-            this.labelChemistryValue.Size = new System.Drawing.Size(22, 25);
+            this.labelChemistryValue.Size = new System.Drawing.Size(200, 25);
             this.labelChemistryValue.TabIndex = 35;
             this.labelChemistryValue.Text = "0";
+            this.labelChemistryValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // labelOverallValue
             // 
-            this.labelOverallValue.AutoSize = true;
             this.labelOverallValue.BackColor = System.Drawing.Color.Transparent;
-            this.labelOverallValue.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelOverallValue.Font = new System.Drawing.Font("Segoe UI", 14F);
             this.labelOverallValue.ForeColor = System.Drawing.Color.Black;
-            this.labelOverallValue.Location = new System.Drawing.Point(90, 35);
+            this.labelOverallValue.Location = new System.Drawing.Point(1, 41);
             this.labelOverallValue.Name = "labelOverallValue";
-            this.labelOverallValue.Size = new System.Drawing.Size(22, 25);
+            this.labelOverallValue.Size = new System.Drawing.Size(200, 25);
             this.labelOverallValue.TabIndex = 34;
             this.labelOverallValue.Text = "0";
+            this.labelOverallValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // comboBoxNationality
             // 
@@ -836,7 +848,7 @@ namespace TeamBuilder
 
         private PlayerLabel selectedPlayerLabel;
         private List<PlayerLabel> players;
-        private List<IComponent> filteringComponents;
+        private List<Tuple<string, Component>> filteringComponents;
 
         private DatabaseHandler databaseHandler;
         private DataSet databaseDataset;

@@ -11,11 +11,13 @@ using System.Linq;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Runtime.Remoting.Metadata;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using System.Xml.Xsl;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace TeamBuilder
@@ -30,7 +32,7 @@ namespace TeamBuilder
 
             this.selectedPlayerLabel = labelPlayer1;
             this.players = new List<PlayerLabel>();
-            this.filteringComponents = new List<IComponent>();
+            this.filteringComponents = new List<Tuple<string, Component>>();
 
             InitializeFilteringComponentsList();
             InitializePlayersList();
@@ -44,14 +46,14 @@ namespace TeamBuilder
 
         private void InitializeFilteringComponentsList()
         {
-            IComponent[] components = {
-                this.textBoxPlayer, 
-                this.numericUpDownMinPrice, 
-                this.numericUpDownMaxPrice,
-                this.comboBoxPosition,
-                this.comboBoxNationality,
-                this.comboBoxClub,
-                this.comboBoxPosition
+            Tuple<string, Component>[] components = {
+                new Tuple<string, Component>( "pozycja", this.comboBoxPosition ),
+                new Tuple<string, Component>( "kraj", this.comboBoxNationality ),
+                new Tuple<string, Component>( "klub", this.comboBoxClub ),
+                new Tuple<string, Component>( "liga", this.comboBoxLeague ),
+                new Tuple<string, Component>( "minCena", this.numericUpDownMinPrice ), 
+                new Tuple<string, Component>( "maxCena", this.numericUpDownMaxPrice ),
+                new Tuple<string, Component>( "piłkarz", this.textBoxPlayer ) 
             };
 
             filteringComponents.AddRange(components);
@@ -65,7 +67,7 @@ namespace TeamBuilder
 
             foreach (var player in playerLabels)
             {
-                player.DefaultText = player.Text;
+                player.DefaultPosition = player.Text;
                 player.PlayerName = "";
                 player.PlayerPosition = "";
                 player.PlayerClub = "";
@@ -148,6 +150,7 @@ namespace TeamBuilder
                 connection.Close();
             }
         }
+
         private void LoadLeagues()
         {
             using (SQLiteConnection connection = new SQLiteConnection(databaseHandler.ConnectionString))
@@ -172,6 +175,7 @@ namespace TeamBuilder
                 connection.Close();
             }
         }
+
         private void LoadClubs()
         {
             using (SQLiteConnection connection = new SQLiteConnection(databaseHandler.ConnectionString))
@@ -197,28 +201,68 @@ namespace TeamBuilder
             }
         }
 
+        private void UpdatePlayersChemistry()
+        {
+            foreach (var player in players)
+            {
+                var playerClub = player.PlayerClub;
+                var playerLeague = player.PlayerLeague;
+                var playerNationality = player.PlayerNationality;
+
+                int sameClub = 0;
+                int sameLeague = 0;
+                int sameNationality = 0;
+
+                players.ForEach(otherPlayer =>
+                {
+                    if (player == otherPlayer)
+                        return;
+
+                    if (playerClub == otherPlayer.PlayerClub && otherPlayer.PlayerClub != "")
+                        sameClub++;
+
+                    if (playerLeague == otherPlayer.PlayerLeague && otherPlayer.PlayerLeague != "")
+                        sameLeague++;
+
+                    if (playerNationality == otherPlayer.PlayerNationality && otherPlayer.PlayerNationality != "")
+                        sameNationality++;
+                });
+
+                if (sameLeague >= 8 || sameNationality >= 8 || sameClub >= 7)
+                    player.PlayerChemistry = 3;
+                else if (sameLeague >= 5 || sameNationality >= 5 || sameClub >= 4)
+                    player.PlayerChemistry = 2;
+                else if (sameLeague >= 3 || sameNationality >= 3 || sameClub >= 2)
+                    player.PlayerChemistry = 1;
+            }
+        }
+
         private void UpdateTeamStats()
         {
-            var priceSum = 0;
-            var overallSum = 0;
+            double chemistrySum = 0.0;
+            double overallSum = 0.0;
+            double priceSum = 0.0;
 
             foreach (var player in players)
             {
-                //MessageBox.Show(player.Name);
-                priceSum += player.PlayerPrice;
+                chemistrySum += player.PlayerChemistry;
                 overallSum += player.PlayerOverall;
+                priceSum += player.PlayerPrice;
             }
 
-            priceSum /= 1000000;
-            labelPriceValue.Text = priceSum.ToString();
+            labelChemistryValue.Text = chemistrySum.ToString();
 
-            overallSum /= 11;
-            labelOverallValue.Text = overallSum.ToString();
+            overallSum *= 0.9 + (chemistrySum / 330.0);
+            overallSum /= 11.0;
+            labelOverallValue.Text = Convert.ToInt32(overallSum).ToString();
+
+            priceSum /= 1000000.0;
+            labelPriceValue.Text = priceSum.ToString() + " mln €";
         }
 
         private void ResetPlayerLabel(PlayerLabel player)
         {
-            player.Text = player.DefaultText;
+            player.Text = player.DefaultPosition;
             player.PlayerName = "";
             player.PlayerPosition = "";
             player.PlayerClub = "";
@@ -229,98 +273,78 @@ namespace TeamBuilder
             player.PlayerChemistry = 0;
         }
 
-        //private void SwapPlayers(PlayerLabel firstPlayer, PlayerLabel secondPlayer)
-        //{
-        //    var tempPlayer = new PlayerLabel();
-
-        //    tempPlayer = firstPlayer;
-        //    firstPlayer = secondPlayer;
-        //    secondPlayer = tempPlayer;
-        //}
+        private void AssignPlayerData(PlayerLabel sourcePlayer, PlayerLabel destinationPlayer)
+        {
+            sourcePlayer.Text = destinationPlayer.Text;
+            sourcePlayer.PlayerName = destinationPlayer.PlayerName;
+            sourcePlayer.PlayerPosition = destinationPlayer.PlayerPosition;
+            sourcePlayer.PlayerClub = destinationPlayer.PlayerClub;
+            sourcePlayer.PlayerLeague = destinationPlayer.PlayerLeague;
+            sourcePlayer.PlayerNationality = destinationPlayer.PlayerNationality;
+            sourcePlayer.PlayerOverall = destinationPlayer.PlayerOverall;
+            sourcePlayer.PlayerPrice = destinationPlayer.PlayerPrice;
+            sourcePlayer.PlayerChemistry = destinationPlayer.PlayerChemistry;
+        }
 
         private void ButtonFilter_Click(object sender, EventArgs e)
         {
-            string query = DEFAULT_QUERY;
-            string selectedPositionString = "";
-            string selectedNationalityString = "";
-            string selectedLeagueString = "";
-            string selectedClubString = "";
-
+            string query = DEFAULT_FILTER_QUERY;
             var filtersMap = new Dictionary<string, string>();
 
-            DataRowView selectedPosition = comboBoxPosition.SelectedValue as DataRowView;
-            DataRowView selectedNationality = comboBoxNationality.SelectedValue as DataRowView;
-            DataRowView selectedLeague = comboBoxLeague.SelectedValue as DataRowView;
-            DataRowView selectedClub = comboBoxClub.SelectedValue as DataRowView;
-
-            int selectedBoxes = 0;
-
-            if (selectedPosition != null)
+            foreach (var filteringComponent in filteringComponents)
             {
-                selectedPositionString = selectedPosition.Row["pozycja"] as string;
-                //filtersMap["pozycja"] = selectedPosition.Row["pozycja"] as string;
-                selectedBoxes++;
+                if (filteringComponent.Item2 is System.Windows.Forms.ComboBox)
+                {
+                    var comboBoxComponent = filteringComponent.Item2 as System.Windows.Forms.ComboBox;
+                    DataRowView selectedValue = comboBoxComponent.SelectedValue as DataRowView;
+                    var selectedValueString = selectedValue.Row[0] as string;
+                    var filterKey = filteringComponent.Item1;
+
+                    filtersMap[filterKey] = selectedValueString;
+                }
+                else if (filteringComponent.Item2 is System.Windows.Forms.NumericUpDown)
+                {
+                    var numericUpDownComponent = filteringComponent.Item2 as System.Windows.Forms.NumericUpDown;
+                    var filterKey = filteringComponent.Item1;
+                    
+                    filtersMap[filterKey] = numericUpDownComponent.Value.ToString();
+                }
+                else if (filteringComponent.Item2 is System.Windows.Forms.TextBox)
+                {
+                    var textBoxComponent = filteringComponent.Item2 as System.Windows.Forms.TextBox;
+                    var filterKey = filteringComponent.Item1;
+
+                    filtersMap[filterKey] = textBoxComponent.Text;
+                }
             }
 
-            if (selectedNationality != null)
+            foreach (var filter in filtersMap)
             {
-                selectedNationalityString = selectedNationality.Row["kraj"] as string;
-                //filtersMap["kraj"] = selectedPosition.Row["kraj"] as string;
-                selectedBoxes++;
+                if (filter.Key == "minCena")
+                {
+                    if (filter.Value != "0" && filter.Value != "")
+                        query += " cena >= '" + filter.Value + "' AND";
+                }
+                else if (filter.Key == "maxCena")
+                {
+                    if (filter.Value != "0" && filter.Value != "")
+                        query += " cena <= '" + filter.Value + "' AND";
+                }
+                else if (filter.Key == "piłkarz")
+                {
+                    if (filter.Value != "")
+                        query += " " + filter.Key + " = '" + filter.Value + "' AND";
+                }
+                else if (filter.Value != NOT_SELECTED_ITEM)
+                {
+                    query += " " + filter.Key + " = '" + filter.Value + "' AND";
+                }
             }
-
-            if (selectedLeague != null)
-            {
-                selectedLeagueString = selectedLeague.Row["liga"] as string;
-                //filtersMap["liga"] = selectedPosition.Row["liga"] as string;
-                selectedBoxes++;
-            }
-
-            if (selectedClub != null)
-            {
-                selectedClubString = selectedClub.Row["klub"] as string;
-                selectedBoxes++;
-            }
-
-            if (selectedBoxes == 0)
-            {
-                return;
-            }
-            else
-            {
-                query += " WHERE";
-            }
-
-            MessageBox.Show(query);
-
-            if (selectedPositionString != NOT_SELECTED_ITEM)
-            {
-                query += " pozycja = '" + selectedPositionString + "' AND";
-            }
-
-            if (selectedNationalityString != NOT_SELECTED_ITEM)
-            {
-                query += " kraj = '" + selectedNationalityString + "' AND";
-            }
-
-            if (selectedLeagueString != NOT_SELECTED_ITEM)
-            {
-                query += " liga = '" + selectedLeagueString + "' AND";
-            }
-
-            if (selectedClubString != NOT_SELECTED_ITEM)
-            {
-                query += " klub = '" + selectedClubString + "' AND";
-            }
-
-            MessageBox.Show(query);
-
-            if (query == DEFAULT_QUERY)
+            
+            if (query == DEFAULT_FILTER_QUERY)
                 return;
 
             query = query.Substring(0, query.Length - 4);
-
-            MessageBox.Show(query);
 
             using (SQLiteConnection connection = new SQLiteConnection(databaseHandler.ConnectionString))
             {
@@ -341,6 +365,25 @@ namespace TeamBuilder
 
         private void ButtonResetFilters_Click(object sender, EventArgs e)
         {
+            foreach (var filteringComponent in filteringComponents)
+            {
+                if (filteringComponent.Item2 is System.Windows.Forms.ComboBox)
+                {
+                    var comboBoxComponent = filteringComponent.Item2 as System.Windows.Forms.ComboBox;
+                    comboBoxComponent.SelectedIndex = 0;
+                }
+                else if (filteringComponent.Item2 is System.Windows.Forms.NumericUpDown)
+                {
+                    var numericUpDownComponent = filteringComponent.Item2 as System.Windows.Forms.NumericUpDown;
+                    numericUpDownComponent.Value = 0;
+                }
+                else if (filteringComponent.Item2 is System.Windows.Forms.TextBox)
+                {
+                    var textBoxComponent = filteringComponent.Item2 as System.Windows.Forms.TextBox;
+                    textBoxComponent.Text = "";
+                }
+            }
+
             ResetDataGridView();
         }
 
@@ -358,15 +401,16 @@ namespace TeamBuilder
             {
                 if (player.PlayerName == playerName)
                 {
-                    //var message = "Podany gracz znajduje się już w składzie.     : ";
-                    //message += selectedPlayerLabel.PlayerName.ToString();
-                    //MessageBox.Show(message);
+                    if (selectedPlayerLabel.PlayerName != "")
+                    {
+                        var tempPlayer = new PlayerLabel();
 
-                    //if (selectedPlayerLabel.PlayerName != "")
-                    //{
-                    //    SwapPlayers(selectedPlayerLabel, player);
-                    //    return;
-                    //}
+                        AssignPlayerData(tempPlayer, selectedPlayerLabel);
+                        AssignPlayerData(selectedPlayerLabel, player);
+                        AssignPlayerData(player, tempPlayer);
+
+                        return;
+                    }
 
                     ResetPlayerLabel(player);
                 }
@@ -378,10 +422,11 @@ namespace TeamBuilder
             selectedPlayerLabel.PlayerClub = playerClub;
             selectedPlayerLabel.PlayerLeague = playerLeague;
             selectedPlayerLabel.PlayerNationality = playerNationality;
-            selectedPlayerLabel.PlayerOverall = playerOverall;
+            selectedPlayerLabel.PlayerOverall = selectedPlayerLabel.CalculateOverall(playerOverall, playerPosition);
             selectedPlayerLabel.PlayerPrice = playerPrice;
-            selectedPlayerLabel.PlayerChemistry = 1;
+            selectedPlayerLabel.PlayerChemistry = 0;
 
+            UpdatePlayersChemistry();
             UpdateTeamStats();
         }
 
@@ -390,6 +435,7 @@ namespace TeamBuilder
             ResetPlayerLabel(selectedPlayerLabel);
             UpdateTeamStats();
         }
+
         private void buttonResetSquad_Click(object sender, EventArgs e)
         {
             foreach (var player in players)
