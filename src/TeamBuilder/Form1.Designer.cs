@@ -1,4 +1,7 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 namespace TeamBuilder
@@ -9,6 +12,9 @@ namespace TeamBuilder
         ///  Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
+
+        private const string NOT_SELECTED_ITEM = "<brak>";
+        private const string DEFAULT_QUERY = "SELECT * FROM Players";
 
         /// <summary>
         ///  Clean up any resources being used.
@@ -49,17 +55,17 @@ namespace TeamBuilder
             this.ButtonDeletePlayer = new System.Windows.Forms.Button();
             this.dataGridViewPlayers = new System.Windows.Forms.DataGridView();
             this.groupBoxTeam = new System.Windows.Forms.GroupBox();
-            this.labelPlayer11 = new System.Windows.Forms.Label();
-            this.labelPlayer10 = new System.Windows.Forms.Label();
-            this.labelPlayer9 = new System.Windows.Forms.Label();
-            this.labelPlayer8 = new System.Windows.Forms.Label();
-            this.labelPlayer7 = new System.Windows.Forms.Label();
-            this.labelPlayer6 = new System.Windows.Forms.Label();
-            this.labelPlayer5 = new System.Windows.Forms.Label();
-            this.labelPlayer4 = new System.Windows.Forms.Label();
-            this.labelPlayer3 = new System.Windows.Forms.Label();
-            this.labelPlayer2 = new System.Windows.Forms.Label();
-            this.labelPlayer1 = new System.Windows.Forms.Label();
+            this.labelPlayer11 = new TeamBuilder.PlayerLabel();
+            this.labelPlayer10 = new TeamBuilder.PlayerLabel();
+            this.labelPlayer9 = new TeamBuilder.PlayerLabel();
+            this.labelPlayer8 = new TeamBuilder.PlayerLabel();
+            this.labelPlayer7 = new TeamBuilder.PlayerLabel();
+            this.labelPlayer6 = new TeamBuilder.PlayerLabel();
+            this.labelPlayer5 = new TeamBuilder.PlayerLabel();
+            this.labelPlayer4 = new TeamBuilder.PlayerLabel();
+            this.labelPlayer3 = new TeamBuilder.PlayerLabel();
+            this.labelPlayer2 = new TeamBuilder.PlayerLabel();
+            this.labelPlayer1 = new TeamBuilder.PlayerLabel();
             this.labelCountry = new System.Windows.Forms.Label();
             this.labelLeague = new System.Windows.Forms.Label();
             this.labelClub = new System.Windows.Forms.Label();
@@ -149,6 +155,7 @@ namespace TeamBuilder
             this.buttonResetSquad.TabIndex = 4;
             this.buttonResetSquad.Text = "Reset";
             this.buttonResetSquad.UseVisualStyleBackColor = false;
+            this.buttonResetSquad.Click += new System.EventHandler(this.buttonResetSquad_Click);
             // 
             // textBoxPlayer
             // 
@@ -309,8 +316,17 @@ namespace TeamBuilder
             // labelPlayer11
             // 
             this.labelPlayer11.BackColor = System.Drawing.Color.Transparent;
+            this.labelPlayer11.DefaultText = null;
             this.labelPlayer11.Location = new System.Drawing.Point(24, 184);
             this.labelPlayer11.Name = "labelPlayer11";
+            this.labelPlayer11.PlayerChemistry = 0;
+            this.labelPlayer11.PlayerClub = null;
+            this.labelPlayer11.PlayerLeague = null;
+            this.labelPlayer11.PlayerName = null;
+            this.labelPlayer11.PlayerNationality = null;
+            this.labelPlayer11.PlayerOverall = 0;
+            this.labelPlayer11.PlayerPosition = null;
+            this.labelPlayer11.PlayerPrice = 0;
             this.labelPlayer11.Size = new System.Drawing.Size(234, 26);
             this.labelPlayer11.TabIndex = 10;
             this.labelPlayer11.Text = "ATT";
@@ -320,8 +336,17 @@ namespace TeamBuilder
             // labelPlayer10
             // 
             this.labelPlayer10.BackColor = System.Drawing.Color.Transparent;
+            this.labelPlayer10.DefaultText = null;
             this.labelPlayer10.Location = new System.Drawing.Point(260, 184);
             this.labelPlayer10.Name = "labelPlayer10";
+            this.labelPlayer10.PlayerChemistry = 0;
+            this.labelPlayer10.PlayerClub = null;
+            this.labelPlayer10.PlayerLeague = null;
+            this.labelPlayer10.PlayerName = null;
+            this.labelPlayer10.PlayerNationality = null;
+            this.labelPlayer10.PlayerOverall = 0;
+            this.labelPlayer10.PlayerPosition = null;
+            this.labelPlayer10.PlayerPrice = 0;
             this.labelPlayer10.Size = new System.Drawing.Size(234, 26);
             this.labelPlayer10.TabIndex = 9;
             this.labelPlayer10.Text = "ATT";
@@ -331,8 +356,17 @@ namespace TeamBuilder
             // labelPlayer9
             // 
             this.labelPlayer9.BackColor = System.Drawing.Color.Transparent;
-            this.labelPlayer9.Location = new System.Drawing.Point(138, 116);
+            this.labelPlayer9.DefaultText = null;
+            this.labelPlayer9.Location = new System.Drawing.Point(129, 116);
             this.labelPlayer9.Name = "labelPlayer9";
+            this.labelPlayer9.PlayerChemistry = 0;
+            this.labelPlayer9.PlayerClub = "";
+            this.labelPlayer9.PlayerLeague = null;
+            this.labelPlayer9.PlayerName = null;
+            this.labelPlayer9.PlayerNationality = null;
+            this.labelPlayer9.PlayerOverall = 0;
+            this.labelPlayer9.PlayerPosition = null;
+            this.labelPlayer9.PlayerPrice = 0;
             this.labelPlayer9.Size = new System.Drawing.Size(234, 26);
             this.labelPlayer9.TabIndex = 8;
             this.labelPlayer9.Text = "ATT";
@@ -342,8 +376,17 @@ namespace TeamBuilder
             // labelPlayer8
             // 
             this.labelPlayer8.BackColor = System.Drawing.Color.Transparent;
+            this.labelPlayer8.DefaultText = null;
             this.labelPlayer8.Location = new System.Drawing.Point(24, 325);
             this.labelPlayer8.Name = "labelPlayer8";
+            this.labelPlayer8.PlayerChemistry = 0;
+            this.labelPlayer8.PlayerClub = null;
+            this.labelPlayer8.PlayerLeague = null;
+            this.labelPlayer8.PlayerName = null;
+            this.labelPlayer8.PlayerNationality = null;
+            this.labelPlayer8.PlayerOverall = 0;
+            this.labelPlayer8.PlayerPosition = null;
+            this.labelPlayer8.PlayerPrice = 0;
             this.labelPlayer8.Size = new System.Drawing.Size(234, 26);
             this.labelPlayer8.TabIndex = 7;
             this.labelPlayer8.Text = "MID";
@@ -353,8 +396,17 @@ namespace TeamBuilder
             // labelPlayer7
             // 
             this.labelPlayer7.BackColor = System.Drawing.Color.Transparent;
+            this.labelPlayer7.DefaultText = null;
             this.labelPlayer7.Location = new System.Drawing.Point(138, 395);
             this.labelPlayer7.Name = "labelPlayer7";
+            this.labelPlayer7.PlayerChemistry = 0;
+            this.labelPlayer7.PlayerClub = null;
+            this.labelPlayer7.PlayerLeague = null;
+            this.labelPlayer7.PlayerName = null;
+            this.labelPlayer7.PlayerNationality = null;
+            this.labelPlayer7.PlayerOverall = 0;
+            this.labelPlayer7.PlayerPosition = null;
+            this.labelPlayer7.PlayerPrice = 0;
             this.labelPlayer7.Size = new System.Drawing.Size(234, 26);
             this.labelPlayer7.TabIndex = 6;
             this.labelPlayer7.Text = "MID";
@@ -364,8 +416,17 @@ namespace TeamBuilder
             // labelPlayer6
             // 
             this.labelPlayer6.BackColor = System.Drawing.Color.Transparent;
+            this.labelPlayer6.DefaultText = null;
             this.labelPlayer6.Location = new System.Drawing.Point(266, 326);
             this.labelPlayer6.Name = "labelPlayer6";
+            this.labelPlayer6.PlayerChemistry = 0;
+            this.labelPlayer6.PlayerClub = null;
+            this.labelPlayer6.PlayerLeague = null;
+            this.labelPlayer6.PlayerName = null;
+            this.labelPlayer6.PlayerNationality = null;
+            this.labelPlayer6.PlayerOverall = 0;
+            this.labelPlayer6.PlayerPosition = null;
+            this.labelPlayer6.PlayerPrice = 0;
             this.labelPlayer6.Size = new System.Drawing.Size(234, 26);
             this.labelPlayer6.TabIndex = 5;
             this.labelPlayer6.Text = "MID";
@@ -375,8 +436,17 @@ namespace TeamBuilder
             // labelPlayer5
             // 
             this.labelPlayer5.BackColor = System.Drawing.Color.Transparent;
+            this.labelPlayer5.DefaultText = null;
             this.labelPlayer5.Location = new System.Drawing.Point(6, 481);
             this.labelPlayer5.Name = "labelPlayer5";
+            this.labelPlayer5.PlayerChemistry = 0;
+            this.labelPlayer5.PlayerClub = null;
+            this.labelPlayer5.PlayerLeague = null;
+            this.labelPlayer5.PlayerName = null;
+            this.labelPlayer5.PlayerNationality = null;
+            this.labelPlayer5.PlayerOverall = 0;
+            this.labelPlayer5.PlayerPosition = null;
+            this.labelPlayer5.PlayerPrice = 0;
             this.labelPlayer5.Size = new System.Drawing.Size(234, 26);
             this.labelPlayer5.TabIndex = 4;
             this.labelPlayer5.Text = "DEF";
@@ -386,8 +456,17 @@ namespace TeamBuilder
             // labelPlayer4
             // 
             this.labelPlayer4.BackColor = System.Drawing.Color.Transparent;
+            this.labelPlayer4.DefaultText = null;
             this.labelPlayer4.Location = new System.Drawing.Point(38, 555);
             this.labelPlayer4.Name = "labelPlayer4";
+            this.labelPlayer4.PlayerChemistry = 0;
+            this.labelPlayer4.PlayerClub = null;
+            this.labelPlayer4.PlayerLeague = null;
+            this.labelPlayer4.PlayerName = null;
+            this.labelPlayer4.PlayerNationality = null;
+            this.labelPlayer4.PlayerOverall = 0;
+            this.labelPlayer4.PlayerPosition = null;
+            this.labelPlayer4.PlayerPrice = 0;
             this.labelPlayer4.Size = new System.Drawing.Size(234, 26);
             this.labelPlayer4.TabIndex = 3;
             this.labelPlayer4.Text = "DEF";
@@ -397,8 +476,17 @@ namespace TeamBuilder
             // labelPlayer3
             // 
             this.labelPlayer3.BackColor = System.Drawing.Color.Transparent;
+            this.labelPlayer3.DefaultText = null;
             this.labelPlayer3.Location = new System.Drawing.Point(243, 555);
             this.labelPlayer3.Name = "labelPlayer3";
+            this.labelPlayer3.PlayerChemistry = 0;
+            this.labelPlayer3.PlayerClub = null;
+            this.labelPlayer3.PlayerLeague = null;
+            this.labelPlayer3.PlayerName = null;
+            this.labelPlayer3.PlayerNationality = null;
+            this.labelPlayer3.PlayerOverall = 0;
+            this.labelPlayer3.PlayerPosition = null;
+            this.labelPlayer3.PlayerPrice = 0;
             this.labelPlayer3.Size = new System.Drawing.Size(234, 26);
             this.labelPlayer3.TabIndex = 2;
             this.labelPlayer3.Text = "DEF";
@@ -408,8 +496,17 @@ namespace TeamBuilder
             // labelPlayer2
             // 
             this.labelPlayer2.BackColor = System.Drawing.Color.Transparent;
+            this.labelPlayer2.DefaultText = null;
             this.labelPlayer2.Location = new System.Drawing.Point(266, 481);
             this.labelPlayer2.Name = "labelPlayer2";
+            this.labelPlayer2.PlayerChemistry = 0;
+            this.labelPlayer2.PlayerClub = null;
+            this.labelPlayer2.PlayerLeague = null;
+            this.labelPlayer2.PlayerName = null;
+            this.labelPlayer2.PlayerNationality = null;
+            this.labelPlayer2.PlayerOverall = 0;
+            this.labelPlayer2.PlayerPosition = null;
+            this.labelPlayer2.PlayerPrice = 0;
             this.labelPlayer2.Size = new System.Drawing.Size(234, 26);
             this.labelPlayer2.TabIndex = 1;
             this.labelPlayer2.Text = "DEF";
@@ -419,8 +516,17 @@ namespace TeamBuilder
             // labelPlayer1
             // 
             this.labelPlayer1.BackColor = System.Drawing.Color.Transparent;
+            this.labelPlayer1.DefaultText = null;
             this.labelPlayer1.Location = new System.Drawing.Point(138, 636);
             this.labelPlayer1.Name = "labelPlayer1";
+            this.labelPlayer1.PlayerChemistry = 0;
+            this.labelPlayer1.PlayerClub = null;
+            this.labelPlayer1.PlayerLeague = null;
+            this.labelPlayer1.PlayerName = null;
+            this.labelPlayer1.PlayerNationality = null;
+            this.labelPlayer1.PlayerOverall = 0;
+            this.labelPlayer1.PlayerPosition = null;
+            this.labelPlayer1.PlayerPrice = 0;
             this.labelPlayer1.Size = new System.Drawing.Size(234, 26);
             this.labelPlayer1.TabIndex = 0;
             this.labelPlayer1.Text = "GK";
@@ -700,17 +806,17 @@ namespace TeamBuilder
         private Button ButtonDeletePlayer;
         private DataGridView dataGridViewPlayers;
         private GroupBox groupBoxTeam;
-        private Label labelPlayer11;
-        private Label labelPlayer10;
-        private Label labelPlayer9;
-        private Label labelPlayer8;
-        private Label labelPlayer7;
-        private Label labelPlayer6;
-        private Label labelPlayer5;
-        private Label labelPlayer4;
-        private Label labelPlayer3;
-        private Label labelPlayer2;
-        private Label labelPlayer1;
+        private PlayerLabel labelPlayer11;
+        private PlayerLabel labelPlayer10;
+        private PlayerLabel labelPlayer9;
+        private PlayerLabel labelPlayer8;
+        private PlayerLabel labelPlayer7;
+        private PlayerLabel labelPlayer6;
+        private PlayerLabel labelPlayer5;
+        private PlayerLabel labelPlayer4;
+        private PlayerLabel labelPlayer3;
+        private PlayerLabel labelPlayer2;
+        private PlayerLabel labelPlayer1;
         private Label labelCountry;
         private Label labelLeague;
         private Label labelClub;
@@ -728,7 +834,9 @@ namespace TeamBuilder
         private Label labelChemistryValue;
         private Label labelOverallValue;
 
-        private Label selectedLabel;
+        private PlayerLabel selectedPlayerLabel;
+        private List<PlayerLabel> players;
+        private List<IComponent> filteringComponents;
 
         private DatabaseHandler databaseHandler;
         private DataSet databaseDataset;
