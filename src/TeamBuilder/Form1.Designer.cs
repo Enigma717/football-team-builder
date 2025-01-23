@@ -14,6 +14,7 @@ namespace TeamBuilder
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
+        private const string DEFAULT_SAVE_DIRECTORY = "\\SavedSquads";
         private const string NOT_SELECTED_ITEM = "<brak>";
         private const string DEFAULT_QUERY = "SELECT * FROM Players";
         private const string DEFAULT_FILTER_QUERY = "SELECT * FROM Players WHERE";
@@ -135,6 +136,7 @@ namespace TeamBuilder
             this.buttonSaveSquad.TabIndex = 2;
             this.buttonSaveSquad.Text = "Zapisz";
             this.buttonSaveSquad.UseVisualStyleBackColor = false;
+            this.buttonSaveSquad.Click += new System.EventHandler(this.buttonSaveSquad_Click);
             // 
             // buttonLoadSquad
             // 
@@ -146,6 +148,7 @@ namespace TeamBuilder
             this.buttonLoadSquad.TabIndex = 3;
             this.buttonLoadSquad.Text = "Wczytaj";
             this.buttonLoadSquad.UseVisualStyleBackColor = false;
+            this.buttonLoadSquad.Click += new System.EventHandler(this.buttonLoadSquad_Click);
             // 
             // buttonResetSquad
             // 

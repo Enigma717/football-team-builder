@@ -12,6 +12,7 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.Remoting.Metadata;
+using System.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -79,6 +80,97 @@ namespace TeamBuilder
             }
 
             players.AddRange(playerLabels);
+        }
+
+        private void SaveSquadToFile()
+        {
+            string dirPath =
+                Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName
+                + @DEFAULT_SAVE_DIRECTORY;
+            Directory.CreateDirectory(dirPath);
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "SquadBuilder Formation File|*.sbf";
+            saveFileDialog.Title = "Save your squad formation";
+            saveFileDialog.RestoreDirectory = true;
+            saveFileDialog.InitialDirectory = dirPath;
+            saveFileDialog.ShowDialog();
+
+            if (saveFileDialog.FileName != "")
+            {
+                FileStream fileStream = (FileStream)saveFileDialog.OpenFile();
+
+                var playerLabels = this.groupBoxTeam.Controls
+                    .OfType<PlayerLabel>()
+                    .ToList();
+
+                using (StreamWriter streamWriter = new StreamWriter(fileStream))
+                {
+                    foreach (var player in playerLabels)
+                    {
+                        string playerData = player.DefaultPosition + ";"
+                            + player.PlayerName + ";"
+                            + player.PlayerPosition + ";"
+                            + player.PlayerClub + ";"
+                            + player.PlayerLeague + ";"
+                            + player.PlayerNationality + ";"
+                            + player.PlayerOverall.ToString() + ";"
+                            + player.PlayerPrice.ToString();
+
+                        streamWriter.WriteLine(playerData);
+                    }
+                }
+
+                fileStream.Close();
+            }
+        }
+
+        private void LoadSquadFromFile()
+        {
+            string dirPath =
+                Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName
+                + @DEFAULT_SAVE_DIRECTORY;
+            Directory.CreateDirectory(dirPath);
+
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "SquadBuilder Formation File|*.sbf";
+            openFileDialog.Title = "Load your squad formation";
+            openFileDialog.RestoreDirectory = true;
+            openFileDialog.InitialDirectory = dirPath;
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                FileStream fileStream = (FileStream)openFileDialog.OpenFile();
+
+                var playerLabels = this.groupBoxTeam.Controls
+                    .OfType<PlayerLabel>()
+                    .ToList();
+
+                using (StreamReader streamReader = new StreamReader(fileStream))
+                {
+                    foreach (var player in playerLabels)
+                    {
+                        string playerData = streamReader.ReadLine();
+                        string[] dataTokens = playerData.Split(';');
+
+                        player.DefaultPosition = dataTokens[0];
+                        player.PlayerName = dataTokens[1];
+                        player.PlayerPosition = dataTokens[2];
+                        player.PlayerClub = dataTokens[3];
+                        player.PlayerLeague = dataTokens[4];
+                        player.PlayerNationality = dataTokens[5];
+                        player.PlayerOverall = Convert.ToInt32(dataTokens[6]);
+                        player.PlayerPrice = Convert.ToInt32(dataTokens[7]);
+                        player.PlayerChemistry = 0;
+                        player.Text = player.PlayerName == "" ? player.DefaultPosition : player.PlayerName;
+                    }
+                }
+
+                UpdatePlayersChemistry();
+                UpdateTeamStats();
+
+                fileStream.Close();
+            }
         }
 
         private void ResetDataGridView()
@@ -499,6 +591,16 @@ namespace TeamBuilder
         private void labelPlayer11_Click(object sender, EventArgs e)
         {
             selectedPlayerLabel = sender as PlayerLabel;
+        }
+
+        private void buttonSaveSquad_Click(object sender, EventArgs e)
+        {
+            SaveSquadToFile();
+        }
+
+        private void buttonLoadSquad_Click(object sender, EventArgs e)
+        {
+            LoadSquadFromFile();
         }
     }
 }
